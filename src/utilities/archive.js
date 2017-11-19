@@ -1,5 +1,9 @@
 /* globals DatArchive window */
 
+const DEFAULT_FILE_OPTS = {
+  recursive: true
+};
+
 export default class Archive {
   constructor(url = window.location.host) {
     this.archive = new DatArchive(url);
@@ -41,4 +45,13 @@ export default class Archive {
     });
   }
 
+  getFiles(directory, opts = DEFAULT_FILE_OPTS) {
+    return this.archive.readdir(directory, opts);
+  }
+
+  deleteFile(path, fileName) {
+    return this.archive.unlink(`${path}/${fileName}`).then(() => {
+      this.archive.commit();
+    });
+  }
 }

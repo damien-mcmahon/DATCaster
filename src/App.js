@@ -16,8 +16,10 @@ class App extends Component {
     super(props);
 
     const archive = new Archive();
+
     this.state = {
       archive,
+      casts: [],
       mediaRecorder: null,
       stream: null
     }
@@ -25,12 +27,18 @@ class App extends Component {
 
   doSetup = stream => {
     const mediaRecorder = new MediaRecorder(stream);
+    const { state: { archive }} = this;
 
-    this.setState(state => ({
-      ...state,
-      mediaRecorder,
-      stream
-    }));
+    archive.getFiles(CASTS_DIR)
+      .then(casts => {
+        this.setState(state => ({
+          ...state,
+          mediaRecorder,
+          casts,
+          stream
+        }));
+      })
+      .catch(err => console.log("DM => get file err", err));
   }
 
   handleNoSetup = err => {
@@ -53,9 +61,14 @@ class App extends Component {
       .catch(err => console.log("DM => ERR", err));
   }
 
+  deleteFile = fileName => {
+    const { state: { archive }} = this;
+    archive.deleteFile(CASTS_DIR, fileName);
+  }
+
   render() {
     const { props, state } = this;
-    const { stream, mediaRecorder } = state;
+    const { casts, stream, mediaRecorder } = state;
 
     return (
       <div className="App">
@@ -65,10 +78,17 @@ class App extends Component {
         {stream && stream.active &&
           <Visualiser stream={stream} />
         }
+
         {mediaRecorder &&
           <Recorder recorder={mediaRecorder} onSave={this.saveAudio}/>
         }
-        <DATList />
+
+        {casts.length > 0 &&
+          <DATList 
+            directory={CASTS_DIR} 
+            casts={casts}
+            onDelete={this.deleteFile}/>
+        }
       </div>
     );
   }
