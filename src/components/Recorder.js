@@ -101,24 +101,35 @@ export default class Recorder extends Component {
   }
 
   render() {
-    const { state } = this;
+    const { props: { isDat }, state } = this;
     const { duration, recordButtonDisabled, showSaveDialog } = state;
 
     return (
       <div className="datcaster__recorder-wrapper">
         <Timer duration={duration} />
+        {isDat && [
         <button 
+          key="record"
           className="recorder__record-button"
           onClick={this.record}
-          disabled={recordButtonDisabled}>Record</button> 
+          disabled={recordButtonDisabled}>Record</button>,
         <button 
+          key="pause"
           className="recorder__pause-button"
-          onClick={this.pauseRecording}>Pause</button> 
+          onClick={this.pauseRecording}>Pause</button>,
         <button 
+          key="stop"
           className="recorder__stop-button"
-          onClick={this.stopRecording}>Stop</button> 
+          onClick={this.stopRecording}>Stop</button>,
+        ]}
+        {!isDat &&
+          <div className="recorder__no-dat">
+            <h1>Open this in Beaker Browser to Record</h1>
+          </div>
+        }
+
         {showSaveDialog &&
-          <div className="recorder__save-dialog">
+          <div key="save" className="recorder__save-dialog">
             <h1>Save this Recording</h1>
             <audio src={state.audioURL} controls={true} />
             <input ref={(input) => {this.input = input}} placeholder="Name of the file" />

@@ -16,12 +16,14 @@ class App extends Component {
     super(props);
 
     const archive = new Archive();
+    const isDat = window.location.protocol === 'dat:';
 
     this.state = {
       archive,
       casts: [],
       mediaRecorder: null,
-      stream: null
+      stream: null,
+      isDat
     }
   }
 
@@ -68,7 +70,7 @@ class App extends Component {
 
   render() {
     const { props, state } = this;
-    const { casts, stream, mediaRecorder } = state;
+    const { casts, isDat, stream, mediaRecorder } = state;
 
     return (
       <div className="App">
@@ -80,7 +82,7 @@ class App extends Component {
         }
 
         {mediaRecorder &&
-          <Recorder recorder={mediaRecorder} onSave={this.saveAudio}/>
+          <Recorder isDat={isDat} recorder={mediaRecorder} onSave={this.saveAudio}/>
         }
 
         {casts.length > 0 &&

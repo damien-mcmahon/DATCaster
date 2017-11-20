@@ -28,7 +28,7 @@ export default class Archive {
     //TODO - this is probably weak logic
     return this.archive.stat(path)
       .then(path => path.isDirectory())
-      .catch(err => console.log("HAS DIR ERR", err));
+      .catch(err => console.log("HAS DIR ERR", path, err));
   }
 
   saveFile(path, name, data) {
