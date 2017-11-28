@@ -1,0 +1,26 @@
+[{
+  "title": "My First DATCast",
+  "description": "Lorem Ipsum",
+  "author": "Damien M",
+  "url":"dat://ba43ebed0d53f963a3d00a56efdb1dcc3ae56ba546699942f935c139d9ba19e7/",
+  "lastUpdated": "2017-11-01T10:00:00",
+  "casts": [{
+    "id": "122332302-232323232323",
+    "title": "Episode 03",
+    "description": "We talk about something or other",
+    "file": "/casts/Episode-03.ogg",
+    "notes": "Lorem ipsum",
+    "tags": ["business", "mentoring", "stuff"],
+    "dat": "dat://ba43ebed0d53f963a3d00a56efdb1dcc3ae56ba546699942f935c139d9ba19e7/"
+  }, {
+    "id": "122332302-1f35cdeafccd323232",
+    "title": "Episode 02",
+    "description": "The Second Episode",
+    "description": "More inane nonsense from these people",
+    "file": "/casts/Episode-02.ogg",
+    "notes": "Ipsum dolor sit amet",
+    "tags": ["business", "mentoring", "dex"],
+    "dat": "dat://ba43ebed0d53f963a3d00a56efdb1dcc3ae56ba546699942f935c139d9ba19e7/"
+  }]
+}]
+

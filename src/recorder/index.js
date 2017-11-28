@@ -1,7 +1,7 @@
 /* globals MediaRecorder navigator */
 import React, { Component } from 'react';
 
-import Archive from '../utilities/archive';
+import Archive from '../models/archive';
 import Visualiser from '../components/Visualiser';
 import Recorder from '../components/Recorder';
 import {
@@ -27,7 +27,6 @@ class RecorderPage extends Component {
 
   doSetup = stream => {
     const mediaRecorder = new MediaRecorder(stream);
-    const { state: { archive }} = this;
 
     this.setState(state => ({
       ...state,
@@ -56,14 +55,15 @@ class RecorderPage extends Component {
 
 
   render() {
-    const { props, state } = this;
-    const { casts, isDat, stream, mediaRecorder } = state;
+    const { state } = this;
+    const { isDat, stream, mediaRecorder } = state;
 
     return (
       <div className="App">
         <header className="App-header">
           <h1>DATCaster</h1>
         </header>
+
         {stream && stream.active &&
           <Visualiser stream={stream} />
         }

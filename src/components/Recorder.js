@@ -1,11 +1,11 @@
 import React, { Component }  from 'react';
 
 import Timer from './Timer';
-import { AUDIO_FILE_OPTS, CASTS_DIR } from '../config';
+import { AUDIO_FILE_OPTS } from '../config';
 
 const RECORDER_INACTIVE = 'inactive';
 const RECORDER_PAUSED = 'paused';
-const RECORDER_RECORDING = 'recording';
+//const RECORDER_RECORDING = 'recording';
 const ONE_SECOND = 1000;
 
 export default class Recorder extends Component {
@@ -94,7 +94,7 @@ export default class Recorder extends Component {
   }
 
   saveRecording = () => {
-    const { props: { onSave}, state: { archive, audioBlob } } = this;
+    const { props: { onSave}, state: { audioBlob } } = this;
     onSave(this.input.value, audioBlob);
 
     this.setState(state => ({...state, showSaveDialog: false}));
